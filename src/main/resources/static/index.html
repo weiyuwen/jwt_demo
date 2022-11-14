@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>login</title>
+</head>
+<body>
+<a href="javascript:void(0)" class="btn1">ajax异步请求，带有token</a>
+
+<script>
+
+  $(".btn1").click(function (){
+    //  从本地获得token值 getItem
+    var tokenStr = localStorage.getItem("token");
+    var token = JSON.parse(tokenStr);
+    console.log(token);
+
+    $.ajax({
+      type:"get",
+      url:"customer/test1",
+      headers: {"token": token},
+      success:function (data){
+        console.log(data)
+      }
+    })
+  })
+
+</script>
+</body>
+</html>

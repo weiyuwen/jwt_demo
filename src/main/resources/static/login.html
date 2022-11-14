@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>index</title>
+</head>
+<body>
+<form   method="post">
+    用户名：<input type="text" class="custName" name="custName"><br>
+    密码：<input type="password" class="custPassword" name="custPassword"><br>
+    <input type="button" class="loginBtn" value="登录">
+</form>
+<script>
+    $(".loginBtn").click(function (){
+        $.ajax({
+            type:"post",
+            url:"customer/login",
+            data:{
+                custName:$(".custName").val(),
+                custPassword:$(".custPassword").val()
+            },
+            success:function (result){
+                console.log("result:" + result);
+                //保存信息到本地，里面都 token
+                // 把token转换成字符串
+                var token = JSON.stringify(result.data);
+                console.log("token:" + token);
+                //token存入本地
+                localStorage.setItem("token",token);
+                window.location.href = "index.html";
+            }
+        })
+    })
+</script>
+
+</body>
+</html>
